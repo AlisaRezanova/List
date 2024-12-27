@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Списки{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'MainPage/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="navbar">
+    <div class="dropdown">
+        <button class="dropdown-btn">МОИ СПИСКИ</button>
+        <div class="dropdown-content" id="categories-list">
+        </div>
+    </div>
+</div>
+<div id="item-list"></div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{% static 'MainPage/js/get_category.js' %}"></script>
+<script type="module" src="{% static 'MainPage/js/form.js' %}"></script>
+{% endblock %}
