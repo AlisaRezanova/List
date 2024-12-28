@@ -64,7 +64,9 @@ class List(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.content_object.title}'
+        if self.content_object:
+            return f'{self.content_object.title}'
+        return 'no title'
 
     class Meta:
         verbose_name = 'List'
