@@ -143,3 +143,4 @@ def sort(request, category_id):
         items = items.order_by('rating').values()
         return JsonResponse({'list': list(items)})
 
+

@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             itemList.appendChild(itemDiv);
                         });
                     } else {
-                        const noItemsMessage = document.createElement("p");
+                        const noItemsMessage = document.createElement("h2");
                         noItemsMessage.textContent = "Элементы не найдены.";
                         itemList.appendChild(noItemsMessage);
                     }
