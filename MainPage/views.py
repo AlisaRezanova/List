@@ -2,7 +2,6 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import *
-from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 
@@ -149,3 +148,5 @@ def sort(request, category_id):
         return JsonResponse({'list': list(items)})
 
 
+def edit_title(request):
+    ...
