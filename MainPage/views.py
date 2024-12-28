@@ -96,16 +96,21 @@ def add_original_title_in_category(request):
 
 def search_title_in_category(request):
     input_name = request.GET.get('input_name')
-    category = request.GET.get('category')
-    titles = []
-    if category == "anime":
-        titles = Anime.objects.filter(title__startswith=input_name).values()
-    elif category == "movie":
-        titles = Movie.objects.filter(title__startswith=input_name).values()
-    elif category == "manga":
-        titles = Manga.objects.filter(title__startswith=input_name).values()
-    elif category == "book":
-        titles = Book.objectss.filter(title__startswith=input_name).values()
+    category = request.GET.get('category', '').lower()
+    print(category)
+    model_mapping = {
+        "аниме": Anime,
+        "фильмы": Movie,
+        "манга": Manga,
+        "книги": Book,
+    }
+
+    if category not in model_mapping:
+        return JsonResponse({'error': 'Invalid category'}, status=400)
+
+    model = model_mapping[category]
+    titles = model.objects.filter(title__istartswith=input_name.capitalize()).values()
+
     return JsonResponse({'titles': list(titles)})
 
 

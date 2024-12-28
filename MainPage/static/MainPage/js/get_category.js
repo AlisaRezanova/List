@@ -1,10 +1,11 @@
 let isFormOpen = false;
 import { open } from './form.js'
-
+let currentCategory = null;
 
 document.addEventListener('DOMContentLoaded', function () {
     const dropdownContent = document.getElementById("categories-list");
     const itemList = document.getElementById("item-list");
+    const dropdownButton = document.querySelector(".dropdown-btn");
 
     fetch("/get_all_category")
         .then(response => response.json())
@@ -30,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener("click", function (e) {
         if (e.target && e.target.matches(".category-item")) {
             e.preventDefault();
+
+            currentCategory = e.target.textContent;
+            dropdownButton.textContent = currentCategory;
+
+
+
             const categoryId = e.target.dataset.id;
             fetch(`/get_all_list_in_category/${categoryId}`)
                 .then(response => response.json())
@@ -73,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     addButton.id = "add-title-button";
                     addButton.className = "btn btn-add";
                     addButton.addEventListener("click", () => {
-                        open();
+                        open(null, currentCategory);
                     });
                     if (!document.getElementById("add-title-button")) {
                         itemList.appendChild(addButton);
