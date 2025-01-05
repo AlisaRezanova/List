@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
@@ -147,6 +148,86 @@ def sort(request, category_id):
         items = items.order_by('rating').values()
         return JsonResponse({'list': list(items)})
 
+@csrf_exempt
+def edit_title(request, title_id):
+    print("YES")
+    user = User.objects.get(id=1)
+    print(user, title_id)
+    title = get_object_or_404(List, object_id=title_id, user=user)
+    if request.method == 'GET':
+        return JsonResponse({
+            'id': title.id,
+            'title': title.content_object.title,
+            'note': title.note,
+            'rating': title.rating,
+        })
+    elif request.method in ['POST', 'PUT']:
+        print("POST|PUT")
+        try:
+            data = json.loads(request.body)
+            title.note = data.get('note', title.note)
+            title.rating = data.get('rating', title.rating)
+            title.save()
+            return JsonResponse({'message': 'Task updated successfully'})
+        except Exception as e:
+            return JsonResponse({'message': f'Error updating task: {str(e)}'}, status=400)
 
-def edit_title(request):
-    ...
+    else:
+        return JsonResponse({'message': 'Method not allowed'}, status=405)
+
+
+def save_title(request):
+    if request.method == 'POST':
+        user = request.user
+        if not User.objects.filter(pk=user.id).exists():
+            return JsonResponse({'message': 'No find such user'}, status=401)
+        try:
+            data = json.loads(request.body)
+            title = data.get('title')
+            note = data.get('note')
+            content_type = data.get('content_type')
+            rating = data.get('rating')
+
+        except json.JSONDecodeError:
+            return JsonResponse({'message': 'Invalid JSON format'}, status=402)
+
+        if not content_type or not title:
+            return JsonResponse({'message': 'Content type and title are required.'}, status=400)
+
+        content_models = {
+            'anime': Anime,
+            'movie': Movie,
+            'manga': Manga,
+            'book': Book,
+        }
+
+        model = content_models.get(content_type.lower())
+        if not model:
+            return JsonResponse({'message': f"Unsupported content type: {content_type}"}, status=400)
+
+        try:
+            content_object, created = model.objects.get_or_create(
+                title=title,
+            )
+        except Exception as e:
+            return JsonResponse({'message': f"Error creating or retrieving content: {str(e)}"}, status=500)
+
+        try:
+            list_item, _ = List.objects.get_or_create(
+                user=user,
+                content_type=ContentType.objects.get_for_model(model),
+                object_id=content_object.id,
+                defaults={
+                    'rating': rating,
+                    'note': note,
+                },
+            )
+        except Exception as e:
+            return JsonResponse({'message': f"Error saving to list: {str(e)}"}, status=500)
+
+        return JsonResponse({
+            'message': 'Title added successfully.',
+            'list_id': list_item.id,
+        }, status=201)
+
+    return JsonResponse({'message': 'Invalid request method.'}, status=405)
