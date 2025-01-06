@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from MainPage.models import Anime, Movie, Manga
+from MainPage.models import Anime, Movie, Manga, Book
 #from translate import Translator
 import time
 import re
@@ -157,3 +157,30 @@ def parse_lord_film():
             )
 
             print(f"Добавлен фильм: {title_clean} - {rating}")
+
+
+def parse_book():
+    for i in range(0, 58427): #5092 начать с него
+        page = requests.get(f'https://knigogid.ru/books/page-{i}')
+        soup = BeautifulSoup(page.text, "html.parser")
+        book_list = soup.find_all('div', class_='b-item')
+        for book in book_list:
+            title_tag = book.find('a', class_='b-item-name')
+            title = title_tag.text.strip() if title_tag else "No Title"
+            title_clean = clean_html_tags(title)
+            rating = book.find('div', class_='b-item-rate').text
+            img_tag = book.find('img')
+            img_url = img_tag['src'] if img_tag and 'src' in img_tag.attrs else None
+            base_url = 'https://knigogid.ru'
+            img = f'{base_url}{img_url}'
+            author = book.find('a', class_='b-item-author').text
+
+            Book.objects.create(
+                title=title_clean,
+                rating=rating,
+                img=img,
+                author=author,
+            )
+
+            print(f"Добавлена книга: {title_clean} - {rating} - {i}")
+
