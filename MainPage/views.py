@@ -148,7 +148,7 @@ def sort(request, category_id):
         items = items.order_by('rating').values()
         return JsonResponse({'list': list(items)})
 
-@csrf_exempt
+
 def edit_title(request, title_id):
     print("YES")
     user = User.objects.get(id=1)
