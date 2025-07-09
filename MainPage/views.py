@@ -150,10 +150,8 @@ def sort(request, category_id):
 
 
 def edit_title(request, title_id):
-    print("YES")
     user = User.objects.get(id=1)
-    print(user, title_id)
-    title = get_object_or_404(List, object_id=title_id, user=user)
+    title = get_object_or_404(List, id=title_id, user=user)
     if request.method == 'GET':
         return JsonResponse({
             'id': title.id,
@@ -162,7 +160,6 @@ def edit_title(request, title_id):
             'rating': title.rating,
         })
     elif request.method in ['POST', 'PUT']:
-        print("POST|PUT")
         try:
             data = json.loads(request.body)
             title.note = data.get('note', title.note)

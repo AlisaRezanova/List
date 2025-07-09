@@ -88,7 +88,8 @@ export function save_form(){
         alert("Заполните все поля!");
         return;
     }
-    const url = currentItemId ? `/edit_title/${currentItemId}` : "/save_title";
+    const url = currentItemId ? `/edit_title/${currentItemId}/` : "/save_title";
+
     fetch(url, {
         method: "POST",
         headers: {
@@ -99,6 +100,7 @@ export function save_form(){
     })
         .then((response) => response.json())
         .then((data) => {
+
             if (data.message && data.message.includes("successfully")) {
                 alert(currentItemId ? "Запись обновлена!" : "Запись добавлена!");
             } else {
@@ -119,7 +121,6 @@ function fetchSuggestions(currentCategory=null) {
         suggestionsList.style.display = "none";
         return;
     }
-    console.log(`Category: ${category}`);
     fetch(`/search_title_in_category?input_name=${encodeURIComponent(titleInput.value)}&category=${category}`)
         .then((response) => response.json())
         .then((data) => {
