@@ -195,10 +195,10 @@ def save_title(request):
             return JsonResponse({'message': 'Content type and title are required.'}, status=400)
 
         content_models = {
-            'anime': Anime,
-            'movie': Movie,
-            'manga': Manga,
-            'book': Book,
+            'аниме': Anime,
+            'фильмы': Movie,
+            'манга': Manga,
+            'книги': Book,
         }
 
         model = content_models.get(content_type.lower())

@@ -1,8 +1,10 @@
 let isFormOpen = false;
 let currentItemId = null;
-
+let currentCategory = null;
 
 export function open(item = null, category = null){
+
+    currentCategory = category;
     const TaskForm = document.getElementById("Form");
     const titleInput = document.getElementById("Title");
     const fullTextInput = document.getElementById("TitleNote");
@@ -28,7 +30,7 @@ export function open(item = null, category = null){
             suggestionsList.style.display = "none";
             return;
         }
-        console.log(`Category: ${category}`);
+
         fetch(`/search_title_in_category?input_name=${encodeURIComponent(titleInput.value)}&category=${encodeURIComponent(category)}`)
             .then((response) => response.json())
             .then((data) => {
@@ -40,7 +42,8 @@ export function open(item = null, category = null){
                         const suggestionItem = document.createElement("li");
                         suggestionItem.textContent = suggestion.title;
                         suggestionItem.style.cursor = "pointer";
-                        suggestionItem.onclick = () => {
+                        suggestionItem.onclick = (e) => {
+                            e.stopPropagation();
                             titleInput.value = suggestion.title;
                             suggestionsList.innerHTML = "";
                             suggestionsList.style.display = "none";
@@ -78,13 +81,14 @@ export function save_form(){
     const newItem = {
         title: titleInput.value,
         note: fullTextInput.value,
-        own_rating: ratingInput.value,
+        rating: ratingInput.value,
+        content_type: currentCategory,
     };
-    if (!newItem.title || !newItem.note || !newItem.own_rating) {
+    if (!newItem.title || !newItem.note || !newItem.rating) {
         alert("Заполните все поля!");
         return;
     }
-    const url = currentItemId ? `/update_item/${currentItemId}` : "/add_item";
+    const url = currentItemId ? `/edit_title/${currentItemId}` : "/save_title";
     fetch(url, {
         method: "POST",
         headers: {
@@ -95,7 +99,7 @@ export function save_form(){
     })
         .then((response) => response.json())
         .then((data) => {
-            if (data.success) {
+            if (data.message && data.message.includes("successfully")) {
                 alert(currentItemId ? "Запись обновлена!" : "Запись добавлена!");
             } else {
                 alert("Ошибка при сохранении записи.");
@@ -150,3 +154,29 @@ function getCSRFToken() {
     const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
     return csrfToken;
 }
+
+document.addEventListener('click', function(event) {
+    const formContainer = document.getElementById('form-container');
+    const openFormBtn = document.getElementById('add-title-button');
+    const target = event.target;
+    if (
+        isFormOpen &&
+        formContainer &&
+        !formContainer.contains(target) &&
+        (!openFormBtn || !openFormBtn.contains(target))
+    ) {
+        close_form();
+    }
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const saveBtn = document.getElementById('Save');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            save_form();
+        });
+    }
+});
