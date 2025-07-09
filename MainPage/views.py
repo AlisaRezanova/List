@@ -150,7 +150,7 @@ def sort(request, category_id):
 
 
 def edit_title(request, title_id):
-    user = User.objects.get(id=1)
+    user = request.user
     title = get_object_or_404(List, id=title_id, user=user)
     if request.method == 'GET':
         return JsonResponse({
