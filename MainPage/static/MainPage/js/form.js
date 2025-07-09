@@ -159,10 +159,12 @@ document.addEventListener('click', function(event) {
     const formContainer = document.getElementById('form-container');
     const openFormBtn = document.getElementById('add-title-button');
     const target = event.target;
+    const clickedInsideItem = target.closest('.item');
     if (
         isFormOpen &&
         formContainer &&
         !formContainer.contains(target) &&
+        !clickedInsideItem &&
         (!openFormBtn || !openFormBtn.contains(target))
     ) {
         close_form();

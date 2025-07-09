@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
             currentCategory = e.target.textContent;
             dropdownButton.textContent = currentCategory;
 
-
-
             const categoryId = e.target.dataset.id;
             fetch(`/get_all_list_in_category/${categoryId}`)
                 .then(response => response.json())
@@ -58,20 +56,30 @@ document.addEventListener('DOMContentLoaded', function () {
                             const itemRating = document.createElement("p");
                             itemRating.textContent = `Моя оценка: ${item.own_rating}`;
                             itemDiv.appendChild(itemRating);
+
                             const Rating = document.createElement("p");
                             Rating.textContent = `Рейтинг: ${item.rating}`;
                             itemDiv.appendChild(Rating);
+
+                            itemDiv.addEventListener('click', () =>{
+
+                                open(item, currentCategory);
+                            });
+
                             itemList.appendChild(itemDiv);
+
+
+
                         });
                     } else {
                         const noItemsMessage = document.createElement("h2");
-                        noItemsMessage.textContent = "Элементы не найдены.";
+                        noItemsMessage.textContent = "Здесь пока пусто";
                         itemList.appendChild(noItemsMessage);
                     }
                 })
                 .catch(() => {
                     const errorMessage = document.createElement("p");
-                    errorMessage.textContent = "Ошибка при загрузке элементов.";
+                    errorMessage.textContent = "Ошибка при загрузке";
                     itemList.appendChild(errorMessage);
                 })
                 .finally(() => {
