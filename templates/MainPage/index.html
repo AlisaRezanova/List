@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+
 {% block title %}Списки{% endblock %}
 
 {% block styles %}
@@ -8,11 +9,13 @@
 
 {% block content %}
 <div class="navbar">
+
     <div class="dropdown">
         <button class="dropdown-btn">МОИ СПИСКИ</button>
         <div class="dropdown-content" id="categories-list">
         </div>
     </div>
+    <img src="{% static 'MainPage/img/lst.png'%}" alt="Список">
 </div>
 <div id="item-list"></div>
 {% endblock %}
