@@ -130,3 +130,13 @@
     margin-top: 20px;
     background-color: #fff;
 }
+
+
+.lst {
+    margin: auto;
+    display: inline-block;
+    padding: 10px;
+    transition: all 0.5s ease;
+    height: 500px;
+    position: relative;
+}

@@ -29,8 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     document.addEventListener("click", function (e) {
+        const img = document.getElementById('img1');
         if (e.target && e.target.matches(".category-item")) {
             e.preventDefault();
+            if (img) {
+                img.style.display = "none";
+            }
 
             currentCategory = e.target.textContent;
             dropdownButton.textContent = currentCategory;
