@@ -140,3 +140,10 @@
     height: 500px;
     position: relative;
 }
+
+
+.lk {
+    height: 70px;
+    position: absolute;
+    right: 20px;
+}
