@@ -33,3 +33,7 @@ class LogView(LoginView):
 def logout_view(request):
     logout(request)
     return redirect('Login')
+
+def see_profile(request):
+    return render(request, 'User/profile.html')
+

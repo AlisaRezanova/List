@@ -9,7 +9,9 @@
 
 {% block content %}
 <div class="navbar">
-    <img src="{% static 'MainPage/img/lk.svg'%}" alt="Профиль" class="lk">
+    <a href="{% url 'Profile' %}">
+        <img src="{% static 'MainPage/img/lk.svg'%}" alt="Профиль" class="lk">
+    </a>
     <div class="dropdown">
         <button class="dropdown-btn">МОИ СПИСКИ</button>
         <div class="dropdown-content" id="categories-list">
