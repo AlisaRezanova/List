@@ -4,6 +4,7 @@
 }
 
 .dropdown-btn {
+    text-decoration: none;
     font-family: Verdana;
     color: #012A36;
     font-weight: 900;
@@ -147,3 +148,5 @@
     position: absolute;
     right: 20px;
 }
+
+

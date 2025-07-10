@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomRegistrationForm, CustomAuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 
 def registration_view(request):
@@ -34,6 +35,16 @@ def logout_view(request):
     logout(request)
     return redirect('Login')
 
+
+@login_required
 def see_profile(request):
-    return render(request, 'User/profile.html')
+    user = request.user
+    info = {
+        'name': None,
+        'username': user.username,
+        'password': user.password
+    }
+    return render(request, 'User/profile.html', info)
+
+
 
