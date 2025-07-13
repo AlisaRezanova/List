@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'MainPage/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'User/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dropdown">
+        <a class="dropdown-btn">АВТОРИЗАЦИЯ </a>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="profile-field">
+        <label for="id_username">Логин</label>
+        {{ form.username }}
+    </div>
+    <div class="profile-field">
+        <label for="id_password1">Пароль</label>
+        {{ form.password1 }}
+    </div>
+    <div class="profile-field">
+        <label for="id_password2">Повторите пароль</label>
+        {{ form.password2 }}
+    </div>
+    <button type="submit">Зарегистрироваться</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

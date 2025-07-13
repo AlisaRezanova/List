@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'MainPage/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'User/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="navbar">
+    <a href="{% url 'Profile' %}">
+        <img src="{% static 'MainPage/img/lk.svg'%}" alt="Профиль" class="lk">
+    </a>
+    <div class="dropdown">
+        <a href="{% url 'home' %}" class="dropdown-btn">ВХОД </a>
+    </div>
+    <div class='profile-fields'>
+        <div class="profile-field">
+            <a>Логин</a>
+            <input type="text" placeholder="Введите логин" id="login" disabled>
+        </div>
+        <div class="profile-field">
+            <a>Пароль</a>
+            <input type="password" placeholder="Введите пароль" id="password" disabled>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{% static 'MainPage/js/get_category.js' %}"></script>
+{% endblock %}

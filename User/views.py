@@ -14,7 +14,6 @@ def registration_view(request):
             username = form.cleaned_data.get('username')
             password1 = form.cleaned_data.get('password1')
             password2 = form.cleaned_data.get('password2')
-
             if password1 != password2:
                 form.add_error('password2', 'Пароли не совпадают.')
             else:
@@ -23,11 +22,11 @@ def registration_view(request):
                 return redirect('/')
     else:
         form = CustomRegistrationForm
-    return render(request, 'User/reg.html', {'form': form})
+    return render(request, 'User/autorization.html', {'form': form})
 
 
 class LogView(LoginView):
-    template_name = 'users/auth.html'
+    template_name = 'User/login.html'
     form_class = CustomAuthenticationForm
 
 
