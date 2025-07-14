@@ -10,23 +10,22 @@
 
 {% block content %}
 <div class="navbar">
-    <a href="{% url 'Profile' %}">
-        <img src="{% static 'MainPage/img/lk.svg'%}" alt="Профиль" class="lk">
-    </a>
-    <div class="dropdown">
-        <a href="{% url 'home' %}" class="dropdown-btn">ВХОД </a>
-    </div>
-    <div class='profile-fields'>
-        <div class="profile-field">
-            <a>Логин</a>
-            <input type="text" placeholder="Введите логин" id="login" disabled>
-        </div>
-        <div class="profile-field">
-            <a>Пароль</a>
-            <input type="password" placeholder="Введите пароль" id="password" disabled>
-        </div>
+    <div class="down">
+            <a class="down-btn">ВХОД </a>
     </div>
 </div>
+<form method="post">
+    {% csrf_token %}
+    <div class="profile-field">
+        <label for="id_username">Логин</label>
+        {{ form.username }}
+    </div>
+    <div class="profile-field">
+        <label for="id_password1">Пароль</label>
+        {{ form.password }}
+    </div>
+    <button type="submit">Войти</button>
+</form>
 {% endblock %}
 
 {% block scripts %}

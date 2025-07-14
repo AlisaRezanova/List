@@ -9,8 +9,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="dropdown">
-        <a class="dropdown-btn">АВТОРИЗАЦИЯ </a>
+<div class="navbar">
+    <div class="down">
+            <a class="down-btn">АВТОРИЗАЦИЯ </a>
+    </div>
 </div>
 <form method="post">
     {% csrf_token %}
@@ -31,5 +33,4 @@
 {% endblock %}
 
 {% block scripts %}
-
 {% endblock %}
