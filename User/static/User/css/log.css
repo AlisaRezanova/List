@@ -1,0 +1,110 @@
+.navbar {
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+
+.down-btn {
+    text-decoration: none;
+    font-family: Verdana;
+    color: #012A36;
+    font-weight: 900;
+    font-size: 64px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: transparent;
+    line-height: 64px;
+    padding: 0;
+    padding-bottom: 45px;
+}
+
+.profile-fields {
+    margin-top: 40px;
+}
+
+.profile-field {
+    display: flex;
+    align-items: center;
+}
+
+.profile-field label {
+    width: 600px;
+    color: #012A36;
+    padding: 12px;
+    display: block;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+.profile-field input {
+    width: 1100px;
+    border: 1px solid #7E52A0;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.page {
+    width: 1100px;
+    border: 1px solid #7E52A0;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    margin: 40px auto;
+    height: 380px;
+
+}
+
+.page form {
+    position: relative;
+    padding-bottom: 100px;
+}
+
+.btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login-btn {
+    border: 1px solid #7E52A0;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin: 0;
+}
+
+.question {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.question .login-btn {
+    margin-top: 0;
+}
+
+.form-buttons {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    height: 100px;
+}
+
+.question a {
+    margin-bottom: 10px;
+    text-align: center;
+}

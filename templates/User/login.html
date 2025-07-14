@@ -5,27 +5,35 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'MainPage/css/styles.css' %}">
-<link rel="stylesheet" href="{% static 'User/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'User/css/log.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="navbar">
+<div class="page">
     <div class="down">
             <a class="down-btn">ВХОД </a>
     </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="profile-field">
+            <label for="id_username">Логин</label>
+            {{ form.username }}
+        </div>
+        <div class="profile-field">
+            <label for="id_password1">Пароль</label>
+            {{ form.password }}
+        </div>
+        <div class="form-buttons">
+            <div class="btn">
+                <button class="login-btn">Войти</button>
+            </div>
+            <div class="question">
+                <a>Нет аккаунта?</a>
+                <a href="{% url 'Registration' %}" class="login-btn">Зарегистрироваться</a>
+            </div>
+        </div>
+    </form>
 </div>
-<form method="post">
-    {% csrf_token %}
-    <div class="profile-field">
-        <label for="id_username">Логин</label>
-        {{ form.username }}
-    </div>
-    <div class="profile-field">
-        <label for="id_password1">Пароль</label>
-        {{ form.password }}
-    </div>
-    <button type="submit">Войти</button>
-</form>
 {% endblock %}
 
 {% block scripts %}

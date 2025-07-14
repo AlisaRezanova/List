@@ -5,6 +5,7 @@ from .forms import CustomRegistrationForm, CustomAuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 
 def registration_view(request):
@@ -28,6 +29,7 @@ def registration_view(request):
 class LogView(LoginView):
     template_name = 'User/login.html'
     form_class = CustomAuthenticationForm
+
 
 
 def logout_view(request):

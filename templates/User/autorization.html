@@ -5,31 +5,39 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'MainPage/css/styles.css' %}">
-<link rel="stylesheet" href="{% static 'User/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'User/css/log.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="navbar">
+<div class="page">
     <div class="down">
             <a class="down-btn">АВТОРИЗАЦИЯ </a>
     </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="profile-field">
+            <label for="id_username">Логин</label>
+            {{ form.username }}
+        </div>
+        <div class="profile-field">
+            <label for="id_password1">Пароль</label>
+            {{ form.password1 }}
+        </div>
+        <div class="profile-field">
+            <label for="id_password2">Повторите пароль</label>
+            {{ form.password2 }}
+        </div>
+        <div class="form-buttons">
+            <div class="btn">
+                <button class="login-btn">Зарегистрироваться</button>
+            </div>
+            <div class="question">
+                <a>Есть аккаунт?</a>
+                <a href="{% url 'Login' %}" class="login-btn">Войти</a>
+            </div>
+         </div>
+    </form>
 </div>
-<form method="post">
-    {% csrf_token %}
-    <div class="profile-field">
-        <label for="id_username">Логин</label>
-        {{ form.username }}
-    </div>
-    <div class="profile-field">
-        <label for="id_password1">Пароль</label>
-        {{ form.password1 }}
-    </div>
-    <div class="profile-field">
-        <label for="id_password2">Повторите пароль</label>
-        {{ form.password2 }}
-    </div>
-    <button type="submit">Зарегистрироваться</button>
-</form>
 {% endblock %}
 
 {% block scripts %}
