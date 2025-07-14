@@ -51,3 +51,20 @@
     color: #333;
     background-color: #f9f9f9;
 }
+
+.logout-btn {
+    border: 1px solid #7E52A0;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    margin: 0;
+}
+
+.question {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
