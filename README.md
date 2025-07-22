@@ -1,1 +1,36 @@
 # List
+## Стек
+1. **Python 3.10**
+2. **Django 5.1.4**
+3. **python-decouple 3.8**
+4. **requests 2.32.3**
+5. **beautifulsoup4**
+## Запуск проекта
+Для запуска проекта на локальном сервере необходимо выполнить команду
+```
+python manage.py runserver
+```
+## Пример .env
+```
+SECRET_KEY=
+DEBUG=
+ALLOWED_HOSTS=
+```
+## Скриншоты
+### Главный экран
+![img.png](img.png)
+### Выпадающий список каталогов
+![img_1.png](img_1.png)
+### Пример выбора каталога манга
+![img_2.png](img_2.png)
+### Пример работы формы на добавление записи
+![img_3.png](img_3.png)
+### Профиль
+![img_4.png](img_4.png)
+### Вход
+![img_7.png](img_7.png)
+### Регистрация
+![img_6.png](img_6.png)
+
+
+
